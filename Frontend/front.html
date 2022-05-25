@@ -7,198 +7,214 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
         crossorigin="" />
-<style>
-    *, *::before, *::after{
-        margin: 0;
-        padding: 0;
-    }
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""></script>
 
-    body{
-        font-family: monospace;
-    }
-    #map
-    {
-        border: 2px rgb(189, 188, 182) solid;
-        border-radius: 13px;
-        padding: 16em 0em;
-        margin: 0 auto;
-        height: auto;
-        width: 80%;
-    }
-    .upper
-    {
-        text-align: center;
-        background-color: rgb(199, 90, 51);
-        padding: 1em 0em;
-        margin-bottom: 0.8em;
-    }
-    .desc
-    {
-        font-weight: bolder;
-        color: white;
-        font-size: 1.4em;
-    }
-    .s{
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-    }
-    .speed , .spillout  , .rec
-    {
-        padding: 2rem;
-        background-color: rgb(148, 148, 150);
-        border-radius: 17px;
-        text-align: center;
-        font-weight: bolder;
-        font-size: 1.2em;
-        color: rgb(239, 255, 254);
-    }
-    .or
-    {
-        color: rgb(76, 10, 151);
-    }
-    .wrapper
-    {
-        width: 80%;
-        margin: 0 auto;
-    }
-    .warning
-    {
-        background-color: rgb(197, 74, 65);
-        border-radius: 17px;
-        text-align: center;
-        font-weight: bolder;
-        font-size: 1.2em;
-        padding: 2rem;
-        color: rgb(225, 255, 255);
-    }
-    .normal
-    {
-        background-color: rgb(97, 82, 71);
-        border-radius: 17px;
-        text-align: center;
-        font-weight: bolder;
-        font-size: 1.2em;
-        padding: 2rem;
-        color: rgb(156, 139, 233);
-    }
-    .hed
-    {
-        padding: 1em 0em;
-        text-align: center;
-        margin: 0 auto;
-        font-family: 'Courier New', Courier, monospace;
-        color: rgb(22, 31, 170);
-        font-weight: bolder;
-    }
-    section
-    {
-        text-align: center;
-    }
-    section > span{
-        color: rgb(199, 90, 51);
-        text-align: center;
-        font-weight: bolder;
-        font-size: 1.1em;
-    }
-</style>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: monospace;
+        }
+
+        #map {
+            border: 2px rgb(189, 188, 182) solid;
+            border-radius: 13px;
+            padding: 16em 0em;
+            margin: 0 auto;
+            height: auto;
+            width: 100%;
+        }
+
+        .upper {
+            text-align: center;
+            background-color: rgb(199, 90, 51);
+            padding: 1em 0em;
+            margin-bottom: 0.8em;
+        }
+
+        .desc {
+            font-weight: bolder;
+            color: white;
+            font-size: 1.4em;
+        }
+
+        .s {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        .speed,
+        .spillout,
+        .rec {
+            padding: 2rem;
+            background-color: rgb(148, 148, 150);
+            border-radius: 17px;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 1.2em;
+            color: rgb(239, 255, 254);
+        }
+
+        .or {
+            color: rgb(76, 10, 151);
+        }
+
+        .wrapper {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .warning {
+            background-color: rgb(197, 74, 65);
+            border-radius: 17px;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 1.2em;
+            padding: 2rem;
+            color: rgb(225, 255, 255);
+        }
+
+        .normal {
+            background-color: rgb(97, 82, 71);
+            border-radius: 17px;
+            text-align: center;
+            font-weight: bolder;
+            font-size: 1.2em;
+            padding: 2rem;
+            color: rgb(156, 139, 233);
+        }
+
+        .hed {
+            padding: 1em 0em;
+            text-align: center;
+            margin: 0 auto;
+            font-family: 'Courier New', Courier, monospace;
+            color: rgb(22, 31, 170);
+            font-weight: bolder;
+        }
+
+        section {
+            text-align: center;
+        }
+
+        section>span {
+            color: rgb(199, 90, 51);
+            text-align: center;
+            font-weight: bolder;
+            font-size: 1.1em;
+        }
+    </style>
 </head>
 
 <body>
-    <section class="upper"> 
-    <div class="desc">
-        Vehicle Route Monitoring
-    </div>
-</section>
+    <section class="upper">
+        <div class="desc">
+            Vehicle Route Monitoring
+        </div>
+    </section>
 
 
-<div class="wrapper">
+    <div class="wrapper">
 
 
-<section class='s'>
-    <div class="speed">
-        Velocity
-    </div>
-    <div class="spillout">
-        <span id="ves"> 200 </span> <span class="or"> Km/hr </span>
-    </div>
-    <div class="rec">
-        high Speed
-    </div>
-</section>
-   
-<div class="hed">
-    <h3>Location</h3>
-</div>
-    <div id="map">
+        <section class='s'>
+            <div class="speed">
+                Velocity
+            </div>
+            <div class="spillout">
+                <span id="ves"> 200 </span> <span class="or"> Km/hr </span>
+            </div>
+            <div class="rec">
+                high Speed
+            </div>
+        </section>
 
+        <div class="hed">
+            <h3>Location</h3>
+        </div>
+        <div id="map">
+
+        </div>
+        <section>
+            <span>
+                Powered axismedium
+            </span>
+        </section>
     </div>
-<section>
-    <span>
-        Powered axismedium
-    </span>
-</section>
-</div>
 </body>
 
 <script>
     // here by setting the map funcs 
-    function giveMeRealTimeData()
-    {
+    function updateLocation(long, lati) {
+    var map = L.map('map').setView([long, lati], 18);
+
+    var osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        accessToken: 'pk.eyJ1IjoieW9zaWFkZXYiLCJhIjoiY2wza3RhOXdpMDVkMjNscHN4dmJub3BtMCJ9.kUFdDaayAL5fD0_i_F_SVA',
+        maxZoom: 18,
+        id: 'mapbox/satellite-v9',
+        tileSize: 512,
+        zoomOffset: -1,
+    });
+
+    osm.addTo(map)
+    L.marker([long, lati]).addTo(map)
+        .bindPopup('Location of the car')
+        .openPopup();
+    }
+
+    function giveMeRealTimeData() {
         let VelocityElement = document.getElementById('ves')
         var xhr = new XMLHttpRequest()
+        let long = -8.94133923609983 
+        let lat = 33.41609257925113
+        updateLocation(long, lat)
         let rec = document.querySelector(".rec")
         xhr.open("GET", "http://localhost:3400/api/backend/routeManager/getdata", true)
-        xhr.onload = function()
-        {
-            if(this.status == 200)
-            {
+        xhr.onload = function () {
+            if (this.status == 200) {
                 // console.log(this.responseText)
                 var data = this.responseText;
                 var jsondata = JSON.parse(data)
                 // console.log(jsondata)
-                VelocityElement.innerHTML = jsondata.velocity 
-                if(parseFloat(jsondata.velocity) >= 2 && parseFloat(jsondata.velocity) <= 50)
-                {
+                VelocityElement.innerHTML = jsondata.velocity
+                if (parseFloat(jsondata.velocity) >= 2 && parseFloat(jsondata.velocity) <= 50) {
                     rec.classList.add("normal")
                     rec.innerHTML = "Normal speed"
                 }
-                if(parseFloat(jsondata.velocity) >= 51 && parseFloat(jsondata.velocity) <= 120)
-                {
+                if (parseFloat(jsondata.velocity) >= 51 && parseFloat(jsondata.velocity) <= 120) {
                     rec.classList.add("warning")
                     rec.innerHTML = "High speed"
                 }
             }
         }
 
-        xhr.onerror = function()
-        {
+        xhr.onerror = function () {
             console.log("An Error has happened")
         }
 
         xhr.send()
     }
 
-    setInterval(giveMeRealTimeData, 3000)
+    setInterval(giveMeRealTimeData, 2000)
+</script>
+
+<script>
+    //, 8°56′30″S 33°24′58″E
+    // 6.3690° S, 34.8888° E
+    // -8.94133923609983, 33.41609257925113
+    
+    
 </script>
 
 
 </html>
-
-<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js">
-
-</script>
-<script>
-// -8.943104399671821, 33.416049440718936
-var map = L.map('map').setView([6.3690, 34.8888], 10);
-
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
-
-osm.addTo(map)
-
-L.marker([6.3690, 34.8888]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
-</script>

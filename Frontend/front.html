@@ -154,8 +154,9 @@
 
 <script>
     // here by setting the map funcs 
-    function updateLocation(long, lati) {
-    var map = L.map('map').setView([long, lati], 18);
+    var long = -8.94133923609983;
+    var lat = 33.41609257925113
+    var map = L.map('map').setView([ -8.94133923609983 , 33.41609257925113], 18);
 
     var osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -166,18 +167,18 @@
         zoomOffset: -1,
     });
 
+    
+    function updateLocation(long, lati) {
     osm.addTo(map)
     L.marker([long, lati]).addTo(map)
         .bindPopup('Location of the car')
         .openPopup();
+    // console.log(osm)
     }
-
     function giveMeRealTimeData() {
         let VelocityElement = document.getElementById('ves')
         var xhr = new XMLHttpRequest()
-        let long = -8.94133923609983 
-        let lat = 33.41609257925113
-        updateLocation(long, lat)
+        
         let rec = document.querySelector(".rec")
         xhr.open("GET", "http://localhost:3400/api/backend/routeManager/getdata", true)
         xhr.onload = function () {
@@ -185,13 +186,16 @@
                 // console.log(this.responseText)
                 var data = this.responseText;
                 var jsondata = JSON.parse(data)
+                let long = jsondata.long 
+                let lat = jsondata.lati
+                updateLocation(long, lat)
                 // console.log(jsondata)
                 VelocityElement.innerHTML = jsondata.velocity
-                if (parseFloat(jsondata.velocity) >= 2 && parseFloat(jsondata.velocity) <= 50) {
+                if (parseFloat(jsondata.velocity) >= 2 && parseFloat(jsondata.velocity) <= 70) {
                     rec.classList.add("normal")
                     rec.innerHTML = "Normal speed"
                 }
-                if (parseFloat(jsondata.velocity) >= 51 && parseFloat(jsondata.velocity) <= 120) {
+                if (parseFloat(jsondata.velocity) >= 71 ) {
                     rec.classList.add("warning")
                     rec.innerHTML = "High speed"
                 }

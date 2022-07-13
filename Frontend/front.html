@@ -74,7 +74,7 @@
         }
 
         .warning {
-            background-color: rgb(197, 74, 65);
+            background-color: rgb(202, 26, 14);
             border-radius: 17px;
             text-align: center;
             font-weight: bolder;
@@ -131,10 +131,10 @@
                 Velocity
             </div>
             <div class="spillout">
-                <span id="ves"> 200 </span> <span class="or"> Km/hr </span>
+                <span id="ves">  </span> <span class="or"> Km/hr </span>
             </div>
             <div class="rec">
-                high Speed
+                Not connected
             </div>
         </section>
 
@@ -153,21 +153,19 @@
 </body>
 
 <script>
-    // here by setting the map funcs 
+    // here by setting the map funcs
     var long = -8.94133923609983;
     var lat = 33.41609257925113
-    var map = L.map('map').setView([ -8.94133923609983 , 33.41609257925113], 18);
+    var map = L.map('map').setView([ -8.94133923609983 , 33.41609257925113], 16);
 
     var osm = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        accessToken: 'pk.eyJ1IjoieW9zaWFkZXYiLCJhIjoiY2wza3RhOXdpMDVkMjNscHN4dmJub3BtMCJ9.kUFdDaayAL5fD0_i_F_SVA',
+        accessToken: 'pk.eyJ1IjoieW9zaWFkZXYiLCJhIjoiY2w1ZzBoODE0MWdmODNtb2VkbWVsNzJncSJ9.ZcuOliXnPNftsqDGPYUFJA',
         maxZoom: 18,
         id: 'mapbox/satellite-v9',
         tileSize: 512,
         zoomOffset: -1,
     });
-
-    
     function updateLocation(long, lati) {
     osm.addTo(map)
     L.marker([long, lati]).addTo(map)
@@ -175,6 +173,10 @@
         .openPopup();
     // console.log(osm)
     }
+    
+
+    
+    
     function giveMeRealTimeData() {
         let VelocityElement = document.getElementById('ves')
         var xhr = new XMLHttpRequest()
